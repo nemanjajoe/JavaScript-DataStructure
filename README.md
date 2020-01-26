@@ -1,2 +1,2 @@
-# JavaScript-funs
- Projectes I made as learning JavaScript. Games, inspirations, ans funs
+# DataStructure in JavaScript
+ It's supposed to help people who are new in code to learn Datastructure in JavaScript. 
