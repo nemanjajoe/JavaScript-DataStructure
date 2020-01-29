@@ -12,7 +12,7 @@
             prepare: list exist,
             output: return the number of the elements existed in the list;
         getElem(i): 
-            prepare: list exist, 0 < i < list.length,
+            prepare: list exist, 0 < i <= list.length,
             output: return the i-th element in the list;
         locateElem(e, compare):
             prepare: list exist, compare() is the optional function used to match the relationship bettwen e and target element.

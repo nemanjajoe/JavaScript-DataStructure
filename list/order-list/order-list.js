@@ -1,6 +1,6 @@
 // order list is the list logic with the sequential storage;
 var IniteList = (() => {
-    var 
+    var
         isEmpty = () => {
             if (list.length === 0) return "empty";
             else return "not empty";
@@ -15,15 +15,15 @@ var IniteList = (() => {
         locateElem = (e, compare) => {
             var outcome = 0;
             if (compare === undefined) {
-                for (let i = 0; i < list.length; i++){
+                for (let i = 0; i < list.length; i++) {
                     if (e === list[i]) {
                         outcome = i;
                         break;
                     }
                 }
                 return outcome;
-            }else {
-                for (let i = 0; i < list.length; i++){
+            } else {
+                for (let i = 0; i < list.length; i++) {
                     if (compare(e, list[i]) === true) {
                         outcome = i;
                         break;
@@ -46,34 +46,38 @@ var IniteList = (() => {
         },
         insert = (i, e) => {
             if (i > 0 && i <= list.length) {
-                for (let j = list.length; j >= i; j--){
+                for (let j = list.length; j >= i; j--) {
                     list[j] = list[j - 1];
                 }
                 list[i] = e;
-            }else {
+            } else {
                 return "type error!"
             }
             return list;
         },
         deleteElem = (i) => {
             if (i > 0 && i <= list.length) {
-                for (let j = i; j <= list.length; j++){
+                for (let j = i; j <= list.length; j++) {
                     list[j - 1] = list[j];
                 }
-            }else {
+            } else {
                 return "type error!"
             }
             return list;
         },
         traverse = (visit) => {
-            for (let i = 0; i < list.length; i++){
+            for (let i = 0; i < list.length; i++) {
                 visit(list[i]);
             }
         };
-    return function IniteList (arr) { 
+    return function IniteList(arr) {
         list = arr;
         this.destroy = () => {
             this.list = null;
+        };
+
+        this.clear = () => {
+            this.list = [];
         };
         this.isEmpty = isEmpty;
         this.length = length;
@@ -81,15 +85,16 @@ var IniteList = (() => {
         this.locateElem = locateElem;
         this.priorElem = priorElem;
         this.nextElem = nextElem;
-        this.clear = clear;
         this.insert = insert;
         this.deleteElem = deleteElem;
         this.traverse = traverse;
         this.list = list;
     };
 })();
+export {IniteList};
 
-var test = new IniteList([1,2,3,4,5,6]);
+
+var test = new IniteList([1, 2, 3, 4, 5, 6]);
 console.log(test.list);
 test.insert(2, "here");
 console.log(test.list);
