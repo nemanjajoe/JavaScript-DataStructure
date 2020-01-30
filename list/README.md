@@ -33,7 +33,7 @@
         deleteElem(i):
             prepare: list exist, 0 < i < list lenghth -1,
             output: find the i-th element in list, then return the element and delete it. list lenghth decrease 1;
-        traverse(vist):
-            prepare:list exist, vist() is a function
+        traverse(visit):
+            prepare:list exist, visit() is a function
             output: for each element in list, as the argument to the function vist(), then invoke the function for each element;
     } ADT list;
