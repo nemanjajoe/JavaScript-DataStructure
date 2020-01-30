@@ -10,7 +10,7 @@ var InitList = (() => {
     })();
 
     class InitList {
-        constructor(arr) {
+        constructor() {
             this.head = null;
             this.length = 0;
         }
@@ -53,7 +53,7 @@ var InitList = (() => {
                         locate++;
                     }
                 }
-                return null;
+                return locate;
             } else {
                 for (let i = 0; i < length && flag; i++) {
                     if (compare(e, currentNode.element)) {
@@ -64,12 +64,12 @@ var InitList = (() => {
                         locate++;
                     }
                 }
-                return null;
+                return locate;
             }
         }
         nextElem(e) {
             let currentNode = this.head,
-                locate = this.locateElem(e) + 1;
+                locate = this.locateElem(e);
             for (let i = 0; i < locate; i++) {
                 currentNode = currentNode.next;
             }
@@ -77,7 +77,7 @@ var InitList = (() => {
         }
         priorElem(e) {
             let currentNode = this.head,
-                locate = this.locateElem(e) - 1;
+                locate = this.locateElem(e);
             for (let i = 0; i < locate; i++) {
                 currentNode = currentNode.next;
             }
@@ -91,12 +91,18 @@ var InitList = (() => {
                 currentNode = this.head,
                 previewsNode;
             if (index > 0 && index <= this.length) {
+                if (index === 1) {
+                    this.head = node;
+                    node.next = currentNode;
+                    return this;
+                }
                 for (let i = 0; i < index - 1; i++) {
+                    previewsNode = currentNode;
                     currentNode = currentNode.next;
                 }
-                previewsNode = currentNode;
                 previewsNode.next = node;
-                node.next = currentNode.next;
+                node.next = currentNode;
+                this.length++;
             } else {
                 return null;
             }
@@ -104,12 +110,18 @@ var InitList = (() => {
         deleteElem(index) {
             let currentNode = this.head,
                 previewsNode;
-            if (index > 0 && index < this.length) {
+            if (index > 0 && index <= this.length) {
+                if (index === 1) {
+                    this.head = currentNode.next;
+                    this.length--;
+                    return this;
+                }
                 for (let i = 0; i < index - 1; i++) {
+                    previewsNode = currentNode;
                     currentNode = currentNode.next;
                 }
-                previewsNode = currentNode;
                 previewsNode.next = currentNode.next;
+                this.length--;
             }else {
                 return null;
             }
@@ -121,6 +133,33 @@ var InitList = (() => {
                 currentNode = currentNode.next;
             }
         }
+        add(element) { // add element to this linked list
+            let node = new Node(element),
+                currentNode = this.head;
+            if (this.head === null) {
+                this.head = node;
+                this.length++;
+            }else{
+                while(currentNode.next != null) {
+                    currentNode = currentNode.next;
+                }
+                currentNode.next = node;
+                this.length++;
+            }
+        }
     }
     return InitList;
 })();
+
+var test = new InitList();
+test.add(2);
+test.add("hi, lady!");
+test.add(6);
+test.deleteElem(2);
+console.log(test);
+test.add("this is haha");
+test.insert(2,"look at me!");
+console.log(test);
+console.log(test.locateElem("this is haha"));
+console.log(test.nextElem(2));
+console.log(test.getElem(4));
