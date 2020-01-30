@@ -24,7 +24,7 @@ var InitList = (() => {
                 return "not empty"
             }
         }
-        length() {
+        getLength() {
             return this.length;
         }
         getElem(i) {
