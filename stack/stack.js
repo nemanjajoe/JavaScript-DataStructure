@@ -65,14 +65,4 @@ var InitStack = (() => { // this is the linked stack. actually, stack is a speci
     return InitStack;
 })();
 
-var test = new InitStack();
-console.log(test.pop());
-test.push("number 1");
-test.push("number 2");
-test.push("number 3");
-console.log(test);
-test.pop();
-test.pop();
-console.log(test.getLength());
-test.push("hahaha, this is stack!");
-console.log(test);
+// export default {InitStack};

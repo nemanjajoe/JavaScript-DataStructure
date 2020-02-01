@@ -48,11 +48,3 @@ var InitPQueue = (() => {
         }
     }
 })();
-
-var test = new InitPQueue();
-test.pInsert(3);
-test.pInsert(6);
-test.pInsert(1);
-console.log(test);
-test.pDelete();
-console.log(test);

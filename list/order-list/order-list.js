@@ -40,10 +40,6 @@ var IniteList = (() => {
             var index = locateElem(e);
             return list[++index];
         },
-        clear = () => {
-            list = [];
-            return list;
-        },
         insert = (i, e) => {
             if (i > 0 && i <= list.length) {
                 for (let j = list.length; j >= i; j--) {

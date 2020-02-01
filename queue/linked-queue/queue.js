@@ -66,12 +66,3 @@ var InitQueue = (() => {
     }
     return InitQueue;
 })();
-
-var test = new InitQueue();
-test.enQueue("this is the number 1");
-test.enQueue("number 2");
-test.enQueue("number 3");
-test.deQueue();
-test.deQueue();
-test.deQueue();
-console.log(test);

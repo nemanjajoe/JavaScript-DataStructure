@@ -150,16 +150,3 @@ var InitList = (() => {
     }
     return InitList;
 })();
-
-var test = new InitList();
-test.add(2);
-test.add("hi, lady!");
-test.add(6);
-test.deleteElem(2);
-console.log(test);
-test.add("this is haha");
-test.insert(2,"look at me!");
-console.log(test);
-console.log(test.locateElem("this is haha"));
-console.log(test.nextElem(2));
-console.log(test.getElem(4));

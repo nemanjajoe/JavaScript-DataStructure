@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./single-linked-list.js"></script>
+    <script>
+        var test = new InitList();
+        test.add(2);
+        test.add("hi, lady!");
+        test.add(6);
+        test.deleteElem(2);
+        console.log(test);
+        test.add("this is haha");
+        test.insert(2, "look at me!");
+        console.log(test);
+        console.log(test.locateElem("this is haha"));
+        console.log(test.nextElem(2));
+        console.log(test.getElem(4));
+    </script>
+</body>
+
+</html>

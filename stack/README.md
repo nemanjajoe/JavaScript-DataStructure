@@ -1,5 +1,5 @@
 # Abstract Data Type
-ADT Stack { 
+ADT Stack { // in linked mermory
     initStack():
         made a new empty Stack;
     destroy():

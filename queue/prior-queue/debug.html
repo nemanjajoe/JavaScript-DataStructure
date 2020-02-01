@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script src="./pQueue.js"></script>
+    <script>
+        var test = new InitPQueue();
+        test.pInsert(3);
+        test.pInsert(6);
+        test.pInsert(1);
+        console.log(test);
+        test.pDelete();
+        console.log(test);
+    </script>
 </body>
+
 </html>
