@@ -1,4 +1,4 @@
-var InitPQueue = (() => {
+const InitPQueue = (() => {
     return class InitPQueue {
         constructor() {
             this.queue = new Array();

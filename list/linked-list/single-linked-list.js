@@ -1,5 +1,5 @@
-var InitList = (() => {
-    var Node = (() => {
+const InitList = (() => {
+    const Node = (() => {
         class Node {
             constructor(element) {
                 this.element = element;

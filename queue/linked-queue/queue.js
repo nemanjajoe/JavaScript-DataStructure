@@ -1,5 +1,5 @@
-var InitQueue = (() => {
-    var Node = (() => {
+const InitQueue = (() => {
+    const Node = (() => {
         return class Node {
             constructor(element) {
                 this.element = element;

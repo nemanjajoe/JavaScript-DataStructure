@@ -1,4 +1,4 @@
-var InitStack = (() => { // this is the linked stack. actually, stack is a specified list;
+const InitStack = (() => { // this is the linked stack. actually, stack is a specified list;
     var Node = (() => {
         class Node {
             constructor(element) {
