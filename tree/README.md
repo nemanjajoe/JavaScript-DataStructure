@@ -24,6 +24,8 @@
             return the node's left child;
         getRightChild(index):
             return the node's right child;
+        addNode(data):
+            creat a new node and add it to the binary tree in order to compelete the tree;
         insertChild(index, newNode, LR):
             LR is 0 or 1, insert to left or right; newNode is not an empty binary tree and has no right sub-tree; acordding to the LR is 0 or 1, assign newNode to the node's left or right as a new sub-tree, and node's original letf or right sub-tree as the new sub-tree assigned to the newTree's right;
         deleteChild(index, LR):

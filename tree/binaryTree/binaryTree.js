@@ -71,6 +71,23 @@ const InitBinaryTree = (() => {
             if (currentNode) return currentNode.right;
             else return false;
         }
+        addNode(data) {
+            let newNode = new Node(data);
+            if (this.head === null) {
+                this.head = newNode;
+                return this;
+            }else {
+                let visit = (node) => {
+                    if (node.left === null) {
+                        node.left = newNode;
+                    }else if (node.right = null) {
+                        node.right = newNode;
+                    }
+                }
+                this.levelOrderTraverse(visit);
+                return this;
+            }
+        }
         insertChild(index, newNode, LR) {
             if (newNode.right != null) return false;
 
