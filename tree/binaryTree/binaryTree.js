@@ -18,7 +18,7 @@ const InitBinaryTree = (() => {
         }
         clear() {
             let clear = (node) => {
-                node.data = undefined;
+                node.data = null;
             }
             this.preOrderTraverse(clear);
         }
@@ -48,13 +48,14 @@ const InitBinaryTree = (() => {
             return this.head;
         }
         getNode(index) {
+            let visit, targetNode;
             if (index === undefined) return false;
-            let visit = (node) => {
+            visit = (node) => {
                 if (index-- === 0)
-                    return node;
-            },
-                node = this.levelOrderTraverse(visit);
-            return node === undefined ? false : node;
+                    targetNode = node;
+            }
+            this.levelOrderTraverse(visit);
+            return targetNode;
         }
         getParent(index) {
             let currentNode = this.getNode(index);
@@ -72,28 +73,32 @@ const InitBinaryTree = (() => {
             else return false;
         }
         addNode(data) {
-            let newNode = new Node(data);
+            let newNode = new Node(data),
+                flag = true;
             if (this.head === null) {
                 this.head = newNode;
                 return this;
-            }else {
+            } else {
                 let visit = (node) => {
-                    if (node.left === null) {
+                    if (node.left === null && flag) {
                         node.left = newNode;
-                    }else if (node.right = null) {
+                        newNode.parent = node;
+                        flag = false;
+                    } else if (node.right === null && flag) {
                         node.right = newNode;
+                        newNode.parent = node;
+                        flag = false;
                     }
                 }
                 this.levelOrderTraverse(visit);
-                return this;
             }
         }
         insertChild(index, newNode, LR) {
             if (newNode.right != null) return false;
 
-            if (this.head === null){
+            if (this.head === null) {
                 this.head = newNode;
-            }else {
+            } else {
                 let currentNode = this.getNode(index),
                     currentLeftChild = currentNode.left,
                     currentRightChild = currentNode.right;
@@ -102,12 +107,12 @@ const InitBinaryTree = (() => {
                     newNode.parent = currentNode;
                     newNode.right = currentLeftChild;
                     currentLeftChild.parent = newNode;
-                }else if (LR === 1) {
+                } else if (LR === 1) {
                     currentNode.right = newNode;
                     newNode.parent = currentNode;
                     newNode.right = currentRightChild;
                     currentRightChild.parent = newNode;
-                }else {
+                } else {
                     return false;
                 }
             }
@@ -147,17 +152,16 @@ const InitBinaryTree = (() => {
                 currentNode = this.head;
                 this.postOrderTraverse(visit, currentNode);
             } else if (currentNode != null) {
-                this.postOrderTraverse(currentNode.left);
-                this.postOrderTraverse(currentNode.right);
+                this.postOrderTraverse(visit, currentNode.left);
+                this.postOrderTraverse(visit, currentNode.right);
                 visit(currentNode);
             }
         }
         levelOrderTraverse(visit, currentNode) {
             if (this.head === null) return false;
-            let queue = [currentNode === undefined ? this.head : currentNode];
-            while (queue.length != 0) {
+            let queue = [this.head];
+            while (queue.length > 0) {
                 currentNode = queue.shift();
-                visit(currentNode);
                 if (currentNode.left != null) {
                     queue.push(currentNode.left);
                     if (currentNode.right != null)
@@ -165,7 +169,24 @@ const InitBinaryTree = (() => {
                 } else if (currentNode.right != null) {
                     queue.push(currentNode.right);
                 }
+                visit(currentNode);
             }
         }
     }
 })();
+
+var test = new InitBinaryTree();
+test.addNode(0);
+for (let i = 1; i <= 6; i++) {
+    test.addNode(i);
+    // console.log(test);
+}
+
+// test.levelOrderTraverse((node) => {
+//     console.log(node);
+//     console.log(node.data);
+// });
+
+test.postOrderTraverse((node) => {
+    console.log(node.data);
+});
