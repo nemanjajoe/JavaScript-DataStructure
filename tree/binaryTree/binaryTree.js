@@ -172,6 +172,40 @@ const InitBinaryTree = (() => {
                 visit(currentNode);
             }
         }
+
+        // aditional functions and algrithoms:
+        preOrderTraverseWithoutRecursion(visit) {
+            let stack = new Array(),
+                currentNode = this.head;
+            while (!!currentNode || stack.length != 0) {
+                if (currentNode === null) {
+                    currentNode = stack.pop();
+                } else {
+                    visit(currentNode);
+                    stack.push(currentNode.right);
+                    currentNode = currentNode.left;
+                }
+            }
+        }
+        inOrderTraverseWithoutRecursion(visit) {
+            let stack = new Array(),
+                currentNode = this.head;
+            while (!!currentNode || stack.length != 0) {
+                if (currentNode === null) {
+                    currentNode = stack.pop();
+                    visit(currentNode);
+                    currentNode = currentNode.right;
+                } else {
+                    stack.push(currentNode);
+                    currentNode = currentNode.left;
+                }
+            }
+        }
+        postOrderTraverseWithoutRecursion(visit) {
+            let stack = new Array(),
+                currentNode = this.head;
+                while (!!currentNode && stack.length != 0) {}
+        }
     }
 })();
 
@@ -182,11 +216,22 @@ for (let i = 1; i <= 6; i++) {
     // console.log(test);
 }
 
+test.postOrderTraverse((node) => {
+    console.log(node.data);
+});
+
 // test.levelOrderTraverse((node) => {
 //     console.log(node);
 //     console.log(node.data);
 // });
 
-test.postOrderTraverse((node) => {
-    console.log(node.data);
-});
+// test.inOrderTraverse((node) => {
+//     console.log(node.data);
+// });
+// test.inOrderTraverseWithoutRecursion((node) => {
+//     console.log(node.data);
+// });
+
+// test.preOrderTraverse((node) => {
+//     console.log(node);
+// });
