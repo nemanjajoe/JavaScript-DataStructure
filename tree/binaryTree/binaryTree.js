@@ -203,8 +203,20 @@ const InitBinaryTree = (() => {
         }
         postOrderTraverseWithoutRecursion(visit) {
             let stack = new Array(),
+                reverse = new Array(),
                 currentNode = this.head;
-                while (!!currentNode && stack.length != 0) {}
+            while (!!currentNode || stack.length != 0) {
+                if (currentNode === null) {
+                    currentNode = stack.pop();
+                } else {
+                    reverse.push(currentNode);
+                    stack.push(currentNode.left);
+                    currentNode = currentNode.right;
+                }
+            }
+            while (reverse.length != 0) {
+                visit(reverse.pop());
+            }
         }
     }
 })();
@@ -219,6 +231,9 @@ for (let i = 1; i <= 6; i++) {
 test.postOrderTraverse((node) => {
     console.log(node.data);
 });
+test.postOrderTraverseWithoutRecursion((node) => {
+    console.log(node.data);
+})
 
 // test.levelOrderTraverse((node) => {
 //     console.log(node);
