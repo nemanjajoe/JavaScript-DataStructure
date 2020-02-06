@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../tree/binaryTree/binaryTree.js"></script>
+    <script src="./heap.js"></script>
+    <script>
+        var test = new Heap(new InitBinaryTree);
+        for (let i = 0; i < 6; i++) {
+            let randomNumber = Math.floor(Math.random()*20);
+            test.add(randomNumber);
+        }
+    </script>
+</body>
+</html>

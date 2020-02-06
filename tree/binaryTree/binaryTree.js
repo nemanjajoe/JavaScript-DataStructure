@@ -221,19 +221,19 @@ const InitBinaryTree = (() => {
     }
 })();
 
-var test = new InitBinaryTree();
-test.addNode(0);
-for (let i = 1; i <= 6; i++) {
-    test.addNode(i);
-    // console.log(test);
-}
+// var test = new InitBinaryTree();
+// test.addNode(0);
+// for (let i = 1; i <= 6; i++) {
+//     test.addNode(i);
+//     // console.log(test);
+// }
 
-test.postOrderTraverse((node) => {
-    console.log(node.data);
-});
-test.postOrderTraverseWithoutRecursion((node) => {
-    console.log(node.data);
-})
+// test.postOrderTraverse((node) => {
+//     console.log(node.data);
+// });
+// test.postOrderTraverseWithoutRecursion((node) => {
+//     console.log(node.data);
+// })
 
 // test.levelOrderTraverse((node) => {
 //     console.log(node);
