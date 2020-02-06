@@ -17,7 +17,7 @@ const InitBST = (() => {
         constructor() {
             this.head = null;
         }
-        searchFrom(item, currentNode) {
+        search(item, currentNode) {
             if (currentNode === undefined) currentNode = this.head;
             if (item === currentNode.item || currentNode === null) {
                 return currentNode;
@@ -31,15 +31,23 @@ const InitBST = (() => {
         }
         add(item, currentNode) {
             let newNode = new Node(item);
-            if (this.head === null) this.head = newNode;
-            if (currentNode === undefined) currentNode = this.head;
-
-            if (currentNode === null) {
-                currentNode = newNode;
-            }else if (item < currentNode.item) {
-                this.add(item, currentNode.left);
-            }else if(item > currentNode.item) {
-                this.add(item, currentNode.right);
+            if (this.head === null) {
+                this.head = newNode;
+            }else if (currentNode === undefined) {
+                currentNode = this.head;
+                if (item < currentNode.item){
+                    if (currentNode.left === null) currentNode.left = newNode;
+                    else {
+                        currentNode = currentNode.left;
+                        this.add(item, currentNode);
+                    }
+                }else if (item > currentNode.item) {
+                    if (currentNode.right === null) currentNode.right = newNode;
+                    else {
+                        currentNode = currentNode.right;
+                        this.add(item, currentNode);
+                    }
+                }
             }
         }
         view() {
@@ -54,3 +62,6 @@ const InitBST = (() => {
 let test = new InitBST();
 
 test.add(3);
+test.add(4);
+test.add(2);
+console.log(test);
