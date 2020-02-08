@@ -1,6 +1,6 @@
 # Abstract Data Type
   
-  * ADT binaryTree {
+   ADT binaryTree {
         
          IitBiTree():
             make an empty binary tree;
