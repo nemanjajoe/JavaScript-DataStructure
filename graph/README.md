@@ -1,6 +1,6 @@
 # Abstract Data Type
 
-    * ADT graph {
+     ADT graph {
 
         InitGraph(vertex, isDirected):
             acordding to the number of vertexs and the graph is directed or not, initailize a graph without edge;
@@ -23,7 +23,7 @@
         nextAdjoinVertex(vertex1, vertex2):
             vertex2 is an adjoin vertex of vertex1, and find the next adjoin vertex of vertex2, then return it, otherwise return false; if vertex2 is not an adjoin vertex of vertex 1, then return false;
         
-        insertEdge(vertex1, vertex2):
+        addEdge(vertex1, vertex2):
             build an edge beteween vertex1 and vertex2;
 
         deleteEdge(vertex1, vertex2):
@@ -33,5 +33,9 @@
             if there is an edge beteween vertex1 and vertex2, then return true, otherwise return false;
         
         traverse(visit, vertex):
-            visit is a function, from the vertex to traverse the graph; every traversed vertex will be a parameter to the visit function, and visit function will be invoked as long as a vertex is traversed;
+            visit is a function, from the vertex to traverse the graph; every traversed vertex will be a 
+            
+            parameter to the visit function, and visit function will be invoked as long as a vertex is traversed;
+
+            there are two types of traversal in graph, depth-first traversal shortly called DFS and breadth-first traversal shortly called BFS; the reason we can call it so is that the depth-first traversal has the basic functionality of depth-first search, the other as well;
     }
