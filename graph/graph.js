@@ -6,7 +6,7 @@ const InitGraph = (() => {
         }
     }
 
-    class InitGraph {
+    return class InitGraph {
         constructor(vertexCount = 0, isDirected = true) {
             this.vertexCount = vertexCount;
             this.edgeCount = 0;
@@ -17,6 +17,11 @@ const InitGraph = (() => {
             // initailize the adjoin list
             for (let i = 0; i < vertexCount; i++) {
                 this.graph[i] = new Node(i);
+                this.isVisited[i] = false;
+            }
+        }
+        resetVisit() {
+            for (let i = this.vertexCount; i >= 0; i--) {
                 this.isVisited[i] = false;
             }
         }
@@ -33,8 +38,8 @@ const InitGraph = (() => {
         isEdge(index1, index2) {
             let currentVertex = this.graph[index1],
                 compareVertex = this.graph[index2];
-            while(!!currentVertex) {
-                if (currentVertex.vertex = compareVertex.vertex)
+            while (!!currentVertex) {
+                if (currentVertex.vertex === compareVertex.vertex)
                     return true;
                 currentVertex = currentVertex.next;
             }
@@ -48,7 +53,7 @@ const InitGraph = (() => {
         }
         firstAdjoinVertex(vertex) {
             let t = this.graph[vertex].next;
-            if (!!t) return t.vertex;
+            if (!!t) return this.graph[t.vertex];
             return false;
         }
         nextAdjoinVertex(index1, index2) {
@@ -56,7 +61,7 @@ const InitGraph = (() => {
                 compareVertex = this.graph[index2];
             while (!!currentVertex && !!currentVertex.next) {
                 if (currentVertex.vertex === compareVertex.vertex) {
-                    return currentVertex.next;
+                    return this.graph[currentVertex.next.vertex];
                 }
                 currentVertex = currentVertex.next;
             }
@@ -66,21 +71,23 @@ const InitGraph = (() => {
             // check if the two vertexs have edge
             if (this.isEdge(index1, index2)) return false;
 
-            let currentVertex = this.graph[index1];
+            let currentVertex = this.graph[index1],
+                newVertex = new Node(index2);
             while (currentVertex.next !== null) {
                 currentVertex = currentVertex.next;
             }
-            currentVertex.next = this.graph[index2];
+            currentVertex.next = newVertex;
             this.edgeCount++;
 
             // if the graph is undirected, then add an edge response to other vertex
             if (this.isDirected === false) {
-                let currentVertex = this.graph[index2];
+                let currentVertex = this.graph[index2],
+                    newVertex = new Node(index1);
                 while (currentVertex.next !== null) {
                     currentVertex = currentVertex.next;
                 }
-                currentVertex.next = this.graph[index1];
-                this.edge++;
+                currentVertex.next = newVertex;
+                // this.edgeCount++;
             }
             return this.graph[index1];
         }
@@ -91,8 +98,8 @@ const InitGraph = (() => {
                     vertex1: this.graph[index1],
                     vertex2: this.graph[index2]
                 };
-            
-            for (let currentVertex = this.graph[index1]; !!currentVertex.next; ) {
+
+            for (let currentVertex = this.graph[index1]; !!currentVertex.next;) {
                 // if the next vertex of current vertex is the target vertex, 
                 // then remove it from vertex1 list
                 if (currentVertex.next.vertex === this.graph[index2].vertex) {
@@ -104,11 +111,10 @@ const InitGraph = (() => {
                 currentVertex = currentVertex.next;
             }
             if (this.isDirected === false) {
-                for (let currentVertex = this.graph[index2]; !!currentVertex.next; ) {
+                for (let currentVertex = this.graph[index2]; !!currentVertex.next;) {
                     if (currentVertex.next.vertex === this.graph[index1].vertex) {
                         let vertex1 = currentVertex.next;
                         currentVertex.next = vertex1.next;
-                        this.edgeCount--;
                         break;
                     }
                     currentVertex = currentVertex.next;
@@ -121,29 +127,54 @@ const InitGraph = (() => {
         }
         // depth-first search;
         DFS(visit, index) {
-             let vertex = this.graph[index];
-             visit(vertex);
-             this.isVisited[index] = true;
-             for (let currentVertex = vertex.next; !!currentVertex; currentVertex = currentVertex.next) {
-                 if (this.isVisited[currentVertex.vertex] === false) {
-                     this.DFS(visit, currentVertex.vertex);
-                 }
-             }
+            let vertex = this.graph[index];
+            visit(vertex);
+            this.isVisited[index] = true;
+            for (let currentVertex = vertex.next; !!currentVertex; currentVertex = currentVertex.next) {
+                if (this.isVisited[currentVertex.vertex] === false) {
+                    this.DFS(visit, currentVertex.vertex);
+                }
+            }
         }
         // breadth-first search;
         BFS(visit, index) {
             let queue = new Array();
             queue.push(this.graph[index]);
+            this.isVisited[index] = true;
             while (queue.length !== 0) {
-                let visitedVertex = queue.pop();
+                let visitedVertex = queue.shift();
                 visit(visitedVertex);
-                this.isVisited[visitedVertex.vertex] = true;
-                for (let currentVertex = vertex.next; !!currentVertex; currentVertex = currentVertex.next) {
-                    if (this.isVisited[currentVertex.vertex] === false) {
-                        queue.push(currentVertex);
+                for (let current = visitedVertex.next; !!current; current = current.next) {
+                    if (this.isVisited[current.vertex] === false) {
+                        let newPush = this.graph[current.vertex];
+                        queue.push(newPush);
+                        this.isVisited[current.vertex] = true;
                     }
                 }
             }
+            // this.resetVisit();
         }
     }
 })();
+
+var test = new InitGraph(8, false);
+test.addEdge(0, 2);
+test.addEdge(0, 7);
+test.addEdge(0, 5);
+test.addEdge(7, 1);
+test.addEdge(7, 4);
+test.addEdge(6, 4);
+test.addEdge(5, 3);
+test.addEdge(5, 4);
+test.addEdge(6, 2);
+test.addEdge(3, 4);
+console.log(test);
+
+var testFunction = (vertex) => {
+    console.log(vertex);
+}
+// test.DFS(testFunction, 0);
+// test.resetVisit();
+// test.BFS(testFunction, 0);
+// console.log(test.firstAdjoinVertex(0));
+// test.deleteEdge(0, 2);
