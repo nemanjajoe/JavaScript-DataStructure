@@ -156,25 +156,3 @@ const InitGraph = (() => {
         }
     }
 })();
-
-var test = new InitGraph(8, false);
-test.addEdge(0, 2);
-test.addEdge(0, 7);
-test.addEdge(0, 5);
-test.addEdge(7, 1);
-test.addEdge(7, 4);
-test.addEdge(6, 4);
-test.addEdge(5, 3);
-test.addEdge(5, 4);
-test.addEdge(6, 2);
-test.addEdge(3, 4);
-console.log(test);
-
-var testFunction = (vertex) => {
-    console.log(vertex);
-}
-// test.DFS(testFunction, 0);
-// test.resetVisit();
-// test.BFS(testFunction, 0);
-// console.log(test.firstAdjoinVertex(0));
-// test.deleteEdge(0, 2);
