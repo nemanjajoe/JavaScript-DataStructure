@@ -5,6 +5,13 @@ const InitGraph = (() => {
             this.next = null;
         }
     }
+    class TagEdge {
+        constructor (start, end, weight = 0) {
+            this.start = start;
+            this.end = end;
+            this.weight = weight;
+        }
+    }
 
     return class InitGraph {
         constructor(vertexCount = 0, isDirected = true) {
@@ -152,7 +159,53 @@ const InitGraph = (() => {
                     }
                 }
             }
-            // this.resetVisit();
         }
+
+        // the following are some commen and simple algorithms
+        topoSort() {
+            // if the graph is directed, then we can't use topoSort to this graph,
+            //topoSort works only for undirected graph; 
+            if (this.isDirected === false) return false; 
+            let topoSeq = [],
+                queue = [],
+                inEdge = new Array(this.vertexCount);
+            for (let i = 0; i < this.vertexCount ; i++) {
+                inEdge[i] = 0;
+            }
+            for (let v = 0; v < this.vertexCount; v++) {
+                for (let current = this.firstAdjoinVertex(v); !!current; current = this.nextAdjoinVertex(v, current.vertex)) {
+                    inEdge[current.vertex]++;
+                }
+            }
+            for (let v = 0; v < this.vertexCount; v++) {
+                if (inEdge[v] === 0) queue.push(v);
+            }
+            while (queue.length !== 0) {
+                let outVertex = queue.shift();
+                topoSeq.push(outVertex);
+                for (let current = this.firstAdjoinVertex(outVertex); !!current; current = this.nextAdjoinVertex(outVertex, current.vertex)) {
+                    inEdge[current.vertex]--;
+                    if (inEdge[current.vertex] === 0) {
+                        queue.push(current.vertex);
+                    }
+                }
+            }
+            return topoSeq;
+        } 
     }
 })();
+
+var test = new InitGraph(9);
+test.addEdge(0, 7);
+test.addEdge(0, 2);
+test.addEdge(7, 8);
+test.addEdge(8, 6);
+test.addEdge(2, 3);
+test.addEdge(3, 6);
+test.addEdge(1, 2);
+test.addEdge(1, 3);
+test.addEdge(3, 5);
+test.addEdge(1, 4);
+test.addEdge(4, 5);
+
+console.log(test.topoSort());

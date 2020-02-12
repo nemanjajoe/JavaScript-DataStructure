@@ -39,3 +39,10 @@
 
             there are two types of traversal in graph, depth-first traversal shortly called DFS and breadth-first traversal shortly called BFS; the reason we can call it so is that the depth-first traversal has the basic functionality of depth-first search, the other as well;
     }
+
+    there are also some algorithms realized in graph:
+    
+    1. topoSort
+    2. prim
+    3. kruskal
+    4.
