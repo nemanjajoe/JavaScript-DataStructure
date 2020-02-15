@@ -5,7 +5,8 @@
 
 * `list` : [linked-list](list/linked-list) and [order-list](list/order-list)
 * `stack` : [stack](stack)
-* `queue` : [queue](queue)
+* `queue` : [queue](queue/linked-queue) and [priority-queue](queue/priority-queue)
 * `tree` : [tree](tree)
 * `heap` : [heap](heap)
 * `graph` : [graph](graph)
+* `sorting` : [sorting](sorting)
