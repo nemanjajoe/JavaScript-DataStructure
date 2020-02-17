@@ -8,7 +8,7 @@ const BasicSort = (() => {
         randomNumber = () => {
             return Math.floor(Math.random() * 100);
         },
-        // generate a random array whose length is offsetting 15; 
+        // generate a random array whose length is offsetting 20; 
         randomArray = (length = 20) => {
             let arr = new Array(length);
             while (length) {
@@ -34,7 +34,7 @@ const BasicSort = (() => {
             for (let i = left; i < right; i++) {
                 for (let j = right; j > i; j--) {
                     if (array[j] < array[j - 1]) {
-                        exchange(array,j,j - 1);
+                        exchange(array, j, j - 1);
                     }
                 }
             }
@@ -47,7 +47,7 @@ const BasicSort = (() => {
                 right = array.length - 1;
             for (let i = right; i > left; i--) {
                 if (array[i] < array[i - 1]) {
-                    exchange(array,i,i - 1);
+                    exchange(array, i, i - 1);
                 }
             }
             for (let i = left + 2; i <= right; i++) {
@@ -71,7 +71,7 @@ const BasicSort = (() => {
                 for (let j = i + 1; j <= right; j++) {
                     if (array[min] > array[j]) min = j;
                 }
-                exchange(array,i,min);
+                exchange(array, i, min);
             }
             return array;
         }

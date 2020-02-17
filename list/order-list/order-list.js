@@ -1,17 +1,20 @@
 // order list is the list logic with the sequential storage;
 var IniteList = (() => {
-    var
+    return class IniteList {
+        constructor (array = new Array()) {
+            this.array = array;
+        }
         isEmpty = () => {
             if (list.length === 0) return "empty";
             else return "not empty";
-        },
+        }
         length = () => {
             return list.length;
-        },
+        }
         getElem = (i) => {
             if (i >= 0 && i <= list.length) return list[--i];
             else return false;
-        },
+        }
         locateElem = (e, compare) => {
             var outcome = 0;
             if (compare === undefined) {
@@ -31,15 +34,15 @@ var IniteList = (() => {
                 }
                 return outcome;
             }
-        },
+        }
         priorElem = (e) => {
             var index = locateElem(e);
             return list[--index];
-        },
+        }
         nextElem = (e) => {
             var index = locateElem(e);
             return list[++index];
-        },
+        }
         insert = (i, e) => {
             if (i > 0 && i <= list.length) {
                 for (let j = list.length; j >= i; j--) {
@@ -50,7 +53,7 @@ var IniteList = (() => {
                 return "type error!"
             }
             return list;
-        },
+        }
         deleteElem = (i) => {
             if (i > 0 && i <= list.length) {
                 for (let j = i; j <= list.length; j++) {
@@ -60,32 +63,13 @@ var IniteList = (() => {
                 return "type error!"
             }
             return list;
-        },
+        }
         traverse = (visit) => {
             for (let i = 0; i < list.length; i++) {
                 visit(list[i]);
             }
-        };
-    return function IniteList(arr) {
-        list = arr;
-        this.destroy = () => {
-            this.list = null;
-        };
-
-        this.clear = () => {
-            this.list = [];
-        };
-        this.isEmpty = isEmpty;
-        this.length = length;
-        this.getElem = getElem;
-        this.locateElem = locateElem;
-        this.priorElem = priorElem;
-        this.nextElem = nextElem;
-        this.insert = insert;
-        this.deleteElem = deleteElem;
-        this.traverse = traverse;
-        this.list = list;
-    };
+        }
+    }
 })();
 export {IniteList};
 
